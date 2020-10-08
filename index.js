@@ -1,8 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const util = require("util");
-const genMarkdown= require("./generatemarkdown");
+const generateMarkdown= require("./generatemarkdown");
 
 function promptUser() {
     return inquirer.prompt([
@@ -11,54 +10,54 @@ function promptUser() {
             type: "input",
             name: "title",
             message: "What's the name of your project or application?"
-        // },
-        // {
-        //     type: "input",
-        //     name: "description",
-        //     message: "Provide a brief description of your work."
-        // },
-        // {
-        //     type: "confirm",
-        //     name: "tableOfContents",
-        //     message: "Would you like to include a table of contents?"
-        // },
-        // {
-        //     type: "input",
-        //     name: "installation",
-        //     message: "What needs to be installed for functionality?"
-        // },
-        // {
-        //     type: "input",
-        //     name: "usage",
-        //     message: "What is this used for and how?"
-        // },
-        // {
-        //     type: "list",
-        //     name: "license",
-        //     message:"What's the licensing of this application/program or product?",
-        //     choices:[1,2,3,4,5]
-        // },
-        // {
-        //     type:"input",
-        //     name:"contributors",
-        //     message:"If others developers can contribute, how can they?"
-        // },
-        // {
-        //     type: "input",
-        //     name:"tests",
-        //     message:"What tests exist for this project and how are they ran?"
-        // },
-        // {
-        //     type: "input",
-        //     name:"questions",
-        //     message:"Lastly, are there any questions you would like to address?"
+        },
+        {
+            type: "input",
+             name: "description",
+             message: "Provide a brief description of your work."
+         },
+         {
+             type: "confirm",
+             name: "tableOfContents",
+             message: "Would you like to include a table of contents?"
+         },
+         {
+             type: "input",
+             name: "installation",
+             message: "What needs to be installed for functionality?"
+         },
+         {
+             type: "input",
+             name: "usage",
+             message: "What is this used for and how?"
+         },
+         {
+             type: "list",
+             name: "license",
+             message:"What's the licensing of this application/program or product?",
+             choices:["GNU AGPLv3","GNU GPLv3","GNU LGPLv3","Mozilla Public License 2.0","MIT","Apache License 2.0","Boost Software License 1.0","The Unlicense"]
+         },
+         {
+             type:"input",
+             name:"contributors",
+             message:"If others developers can contribute, how can they?"
+         },
+         {
+             type: "input",
+             name:"tests",
+             message:"What tests exist for this project and how are they ran?"
+         },
+         {
+             type: "input",
+             name:"questions",
+             message:"Lastly, are there any questions you would like to address?"
         }]);
 
 
 };
-// function to write README file
-function writeToFile(fileName) {
-    fsWrite(fileName, function(err,data){
+ //function to write README file
+function writeToFile(fileName,data) {
+    fs.Write(fileName, function(err,data){
         if (err) {
             throw err;
           }
@@ -68,13 +67,14 @@ function writeToFile(fileName) {
 
 }
 
-// function to initialize program
+ //function to initialize program
 function init() {
     const answers= promptUser();
+
     const marked= generateMarkdown(answers)
     ;
-    writeToFile("readme.md")
+    writeToFile("readme.md", marked)
 }
 
-// function call to initialize program
+ //function call to initialize program
 init();
