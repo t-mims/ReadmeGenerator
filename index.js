@@ -57,7 +57,7 @@ function promptUser() {
 };
  //function to write README file
 function writeToFile(fileName,data) {
-    fs.Write(fileName, function(err,data){
+    fs.Write(fileName,data, function(err,data){
         if (err) {
             throw err;
           }
@@ -70,11 +70,11 @@ function writeToFile(fileName,data) {
  //function to initialize program
 function init() {
     const answers= promptUser();
-
-    const marked= generateMarkdown(answers)
-    ;
-    writeToFile("readme.md", marked)
+    const marked= generateMarkdown(answers);
+    writeToFile("README.md", marked)
 }
+    
+    
 
  //function call to initialize program
 init();

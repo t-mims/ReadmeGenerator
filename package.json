@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/t-mims/ReadmeGenerator#readme",
   "dependencies": {
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "node.js": "0.0.1-security"
   }
 }
