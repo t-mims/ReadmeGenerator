@@ -1,8 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const util = require("util");
 
-const writeFileAsync = util.promisify(fs.writeFile);
+const util = require("util");
+const genMarkdown= require("./generatemarkdown");
 
 function promptUser() {
     return inquirer.prompt([
@@ -11,62 +11,69 @@ function promptUser() {
             type: "input",
             name: "title",
             message: "What's the name of your project or application?"
-        },
-        {
-            type: "input",
-            name: "description",
-            message: "Provide a brief description of your work."
-        },
-        {
-            type: "input",
-            name: "tableOfContents",
-            message: "What are the contents of this document?"
-        },
-        {
-            type: "input",
-            name: "installation",
-            message: "What needs to be installed for functionality?"
-        },
-        {
-            type: "input",
-            name: "usage",
-            message: "What are the terms of usage?"
-        },
-        {
-            type: "list",
-            name: "license",
-            message:"What's the licensing of this application/program or product?",
-            choices:[1,2,3,4,5]
-        },
-        {
-            type:"input",
-            name:"contributors",
-            message:"Who are ,if any, other contributors?"
-        },
-        {
-            type: "input",
-            name:"tests",
-            message:"Any tests?"
-        },
-        {
-            type: "input",
-            name:"questions",
-            message:"Lastly, are there any questions you would like to address?"
+        // },
+        // {
+        //     type: "input",
+        //     name: "description",
+        //     message: "Provide a brief description of your work."
+        // },
+        // {
+        //     type: "confirm",
+        //     name: "tableOfContents",
+        //     message: "Would you like to include a table of contents?"
+        // },
+        // {
+        //     type: "input",
+        //     name: "installation",
+        //     message: "What needs to be installed for functionality?"
+        // },
+        // {
+        //     type: "input",
+        //     name: "usage",
+        //     message: "What is this used for and how?"
+        // },
+        // {
+        //     type: "list",
+        //     name: "license",
+        //     message:"What's the licensing of this application/program or product?",
+        //     choices:[1,2,3,4,5]
+        // },
+        // {
+        //     type:"input",
+        //     name:"contributors",
+        //     message:"If others developers can contribute, how can they?"
+        // },
+        // {
+        //     type: "input",
+        //     name:"tests",
+        //     message:"What tests exist for this project and how are they ran?"
+        // },
+        // {
+        //     type: "input",
+        //     name:"questions",
+        //     message:"Lastly, are there any questions you would like to address?"
         }]);
 
-        //take info from prompt and write new txt file "readme.md"
 
 };
 // function to write README file
-var fs= require("fs")
-function writeToFile(fileName, data) {
-    fsWrite
+function writeToFile(fileName) {
+    fsWrite(fileName, function(err,data){
+        if (err) {
+            throw err;
+          }
+        console.log(data)
+
+    })
 
 }
 
 // function to initialize program
 function init() {
-    promptUser();
+    const answers= promptUser();
+    const marked= generateMarkdown(answers)
+    ;
+    writeToFile("readme.md")
 }
 
 // function call to initialize program
